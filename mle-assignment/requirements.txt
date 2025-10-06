@@ -1,0 +1,5 @@
+pandas
+pyarrow
+fastparquet
+jupyterlab
+scikit-learn
