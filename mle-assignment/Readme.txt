@@ -1,35 +1,37 @@
-https://github.com/neikgnurtel/mle-assignment
-# MLE Assignment 1 – Medallion Backfill (Pandas)
+# MLE Assignment 1 – Medallion Backfill
 
-## Local
-pip install -r requirements.txt
-python main.py --start 2023-05-01 --end 2023-11-01
+All deliverables live in [`mle-assignment/`](mle-assignment).  
+Raw data expected in `data/`, outputs written to `datamart/`.
 
-## By stage
-python main.py --stage bronze
-python main.py --stage silver --start 2023-05-01 --end 2023-11-01
-python main.py --stage gold   --start 2023-05-01 --end 2023-11-01
+## Quick Start (Docker, recommended)
 
-## Docker
-docker compose build
-docker compose up
+From the **repo root**:
+```bash
+docker compose -f mle-assignment/docker-compose.yaml build
 
-## Sanity Model
+# Pandas runner
+docker compose -f mle-assignment/docker-compose.yaml up pandas
+
+# PySpark runner
+docker compose -f mle-assignment/docker-compose.yaml up spark
+
+# Change date range at Runtime
+docker compose -f mle-assignment/docker-compose.yaml run --rm pandas \
+  python mle-assignment/main.py --start 2023-01-01 --end 2024-06-01
+
+docker compose -f mle-assignment/docker-compose.yaml run --rm spark \
+  python mle-assignment/main_spark.py --start 2023-01-01 --end 2024-06-01
+
+# Expected outputsdatamart/
+  bronze/{lms,financials,attributes,clickstream}.parquet
+  silver/loan_daily/snapshot_date=YYYY-MM-01/loan_daily.parquet
+  gold/{feature_store,label_store}/snapshot_date=YYYY-MM-01/{features,labels}.parquet
+
+# Sanity Check
 python - <<'PY'
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import roc_auc_score
-
 T="2023-09-01"
 fe=pd.read_parquet(f"datamart/gold/feature_store/snapshot_date={T}/features.parquet")
 lb=pd.read_parquet(f"datamart/gold/label_store/snapshot_date={T}/labels.parquet")
-df=fe.merge(lb,on="loan_id",how="inner")
-y=df["label_default"].astype(int)
-X=df.select_dtypes("number").drop(columns=["label_default"],errors="ignore").fillna(0)
-
-Xtr,Xte,ytr,yte=train_test_split(X,y,test_size=0.3,random_state=42,stratify=y)
-mdl=LogisticRegression(max_iter=1000,n_jobs=-1).fit(Xtr,ytr)
-auc=roc_auc_score(yte, mdl.predict_proba(Xte)[:,1])
-print("Rows:",len(df)," PosRate:",y.mean().round(4)," AUC:",round(auc,4))
+print("features:", len(fe), "labels:", len(lb))
 PY

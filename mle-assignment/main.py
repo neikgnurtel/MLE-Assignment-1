@@ -276,6 +276,111 @@ def make_labels_for_T_using_overdue(lms_all: pd.DataFrame, T_dt: pd.Timestamp, m
     labels["label_default"] = ((labels["overdue_flag"] > 0) | (labels["leftover_flag"] > 0)).astype(int)
     return labels[["loan_id","label_default"]]
 
+def make_lms_window_features(lms_hist: pd.DataFrame, T_dt: pd.Timestamp) -> pd.DataFrame:
+    """
+    FE từ LMS trong quá khứ gần (≤ T):
+      - Trạng thái tại T: *_last
+      - Cửa sổ 6m & 3m: num_overdue_*, max_overdue_*, sum_due_*, sum_paid_*, paid_to_due_*
+    Trả về 1 row / loan_id.
+    """
+    if lms_hist.empty:
+        return pd.DataFrame(columns=["loan_id"])
+
+    df = lms_hist.copy()
+    # ép kiểu số an toàn
+    for c in ["overdue_amt","due_amt","paid_amt","balance","installment_num","tenure","loan_amt"]:
+        if c in df.columns:
+            df[c] = pd.to_numeric(df[c], errors="coerce")
+
+    win6_start = T_dt - relativedelta(months=6)
+    win3_start = T_dt - relativedelta(months=3)
+
+    df = df[df["post_date"].notna() & (df["post_date"] <= T_dt)]
+
+    # trạng thái gần T (last row ≤ T)
+    last = (df.sort_values(["loan_id","post_date"])
+              .groupby("loan_id").tail(1)
+              [["loan_id","installment_num","tenure","balance","overdue_amt","due_amt","paid_amt","loan_amt"]]
+              .rename(columns={
+                  "installment_num":"inst_num_last",
+                  "balance":"balance_last",
+                  "overdue_amt":"overdue_last",
+                  "due_amt":"due_last",
+                  "paid_amt":"paid_last",
+                  "loan_amt":"loan_amt_last",
+              }))
+    last["remaining_tenor"] = (last["tenure"] - last["inst_num_last"]).clip(lower=0)
+
+    # 6 tháng
+    w6 = df[df["post_date"] > win6_start]
+    agg6 = (w6.assign(ovf = (w6["overdue_amt"].fillna(0) > 0).astype(int))
+              .groupby("loan_id").agg(
+                  num_overdue_6m=("ovf","sum"),
+                  max_overdue_6m=("overdue_amt","max"),
+                  sum_due_6m=("due_amt","sum"),
+                  sum_paid_6m=("paid_amt","sum"),
+              ))
+    agg6["paid_to_due_6m"] = (agg6["sum_paid_6m"] / agg6["sum_due_6m"]).replace([np.inf,-np.inf], np.nan)
+
+    # 3 tháng
+    w3 = df[df["post_date"] > win3_start]
+    agg3 = (w3.assign(ovf = (w3["overdue_amt"].fillna(0) > 0).astype(int))
+              .groupby("loan_id").agg(
+                  num_overdue_3m=("ovf","sum"),
+                  max_overdue_3m=("overdue_amt","max"),
+                  sum_due_3m=("due_amt","sum"),
+                  sum_paid_3m=("paid_amt","sum"),
+              ))
+    agg3["paid_to_due_3m"] = (agg3["sum_paid_3m"] / agg3["sum_due_3m"]).replace([np.inf,-np.inf], np.nan)
+
+    fe_lms = last.set_index("loan_id").join(agg6, how="left").join(agg3, how="left").reset_index()
+    return fe_lms
+
+
+def add_derived_features(feats: pd.DataFrame, lms_hist: pd.DataFrame, T_dt: pd.Timestamp) -> pd.DataFrame:
+    """
+    Thêm FE từ financials/click/attributes đã merge trong feats + join FE từ LMS windows.
+    """
+    out = feats.copy()
+
+    # Financials ratios
+    if "outstanding_debt" in out.columns and "monthly_inhand_salary" in out.columns:
+        od = pd.to_numeric(out["outstanding_debt"], errors="coerce")
+        ms = pd.to_numeric(out["monthly_inhand_salary"], errors="coerce").replace(0, np.nan)
+        out["dti"] = od / ms
+    if "total_emi_per_month" in out.columns and "monthly_inhand_salary" in out.columns:
+        tem = pd.to_numeric(out["total_emi_per_month"], errors="coerce")
+        ms  = pd.to_numeric(out["monthly_inhand_salary"], errors="coerce").replace(0, np.nan)
+        out["emi_to_income"] = tem / ms
+
+    # credit_history_months may already exist; ensure numeric
+    if "credit_history_months" in out.columns:
+        out["credit_history_months"] = pd.to_numeric(out["credit_history_months"], errors="coerce")
+
+    # Type_of_Loan -> num_loan_types
+    tol_col = next((c for c in out.columns if c.lower()=="type_of_loan"), None)
+    if tol_col:
+        out["num_loan_types"] = out[tol_col].fillna("").astype(str).apply(
+            lambda s: len([t for t in [t.strip() for t in s.split(",")] if t])
+        )
+
+    # Clickstream summary (fe_1..fe_20)
+    fe_cols = [c for c in out.columns if re.fullmatch(r"fe_\d+", c)]
+    if fe_cols:
+        tmp = out[fe_cols].apply(pd.to_numeric, errors="coerce")
+        out["click_sum"]   = tmp.sum(axis=1)
+        out["click_mean"]  = tmp.mean(axis=1)
+        out["click_std"]   = tmp.std(axis=1)
+        out["click_posct"] = (tmp > 0).sum(axis=1)
+
+    # Join LMS window FE
+    fe_lms = make_lms_window_features(lms_hist, T_dt)
+    if not fe_lms.empty:
+        out = out.merge(fe_lms, on="loan_id", how="left")
+
+    return out
+
+
 def build_features_for_T(T_dt: pd.Timestamp, lms_hist: pd.DataFrame,
                          attrs: pd.DataFrame, fins: pd.DataFrame, click: pd.DataFrame) -> pd.DataFrame:
     """
@@ -307,7 +412,8 @@ def build_features_for_T(T_dt: pd.Timestamp, lms_hist: pd.DataFrame,
         if "customer_id" in click_T.columns:
             feats = feats.merge(click_T.drop(columns=["snapshot_date"], errors="ignore"),
                                 on="customer_id", how="left", suffixes=(None,"_click"))
-
+            
+    feats = add_derived_features(feats, lms_hist, T_dt)
     return feats
 
 # ---------------- GOLD ----------------
