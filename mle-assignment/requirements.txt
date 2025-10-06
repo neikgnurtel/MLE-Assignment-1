@@ -3,3 +3,5 @@ pyarrow
 fastparquet
 jupyterlab
 scikit-learn
+python-dateutil
+pyspark

@@ -85,7 +85,7 @@ def parse_any_date(series: pd.Series) -> pd.Series:
     mask2 = s.isna() & series.notna()
     if mask2.any():
         # cuối cùng: để pandas suy đoán
-        s3 = pd.to_datetime(series[mask2], errors="coerce")
+        s3 = pd.to_datetime(series[mask2])
         s.loc[mask2] = s3
     return s
 
