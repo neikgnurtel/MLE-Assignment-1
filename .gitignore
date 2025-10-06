@@ -3,3 +3,7 @@ datamart/
 *.parquet
 *.csv
 .env
+
+.DS_Store
+**/.ipynb_checkpoints/
+*.zip
