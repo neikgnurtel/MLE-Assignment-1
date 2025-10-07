@@ -1,9 +1,5 @@
-data/
 datamart/
+__pycache__/
+.ipynb_checkpoints/
 *.parquet
-*.csv
 .env
-
-.DS_Store
-**/.ipynb_checkpoints/
-*.zip

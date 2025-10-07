@@ -1,0 +1,17 @@
+services:
+  mle-pipeline:
+    build: .
+    working_dir: /app
+    volumes: [ ".:/app" ]
+    environment: [ "PYTHONUNBUFFERED=1" ]
+    command: python main.py --stage all --start 2023-05-01 --end 2023-11-01
+
+  lab:
+    build: .
+    working_dir: /app
+    ports: [ "8888:8888" ]
+    volumes: [ ".:/app" ]
+    command: >
+      jupyter lab --ip=0.0.0.0 --no-browser
+      --ServerApp.token='' --ServerApp.password=''
+      --allow-root
