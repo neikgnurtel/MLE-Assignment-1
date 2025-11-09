@@ -1830,3 +1830,24 @@
 [2025-11-09T10:47:07.962+0000] {logging_mixin.py:188} INFO - [2025-11-09T10:47:07.961+0000] {dag.py:3096} INFO - Sync 1 DAGs
 [2025-11-09T10:47:08.033+0000] {logging_mixin.py:188} INFO - [2025-11-09T10:47:08.033+0000] {dag.py:3954} INFO - Setting next_dagrun for ml_pipeline_dag to 2025-11-01 00:00:00+00:00, run_after=2025-12-01 00:00:00+00:00
 [2025-11-09T10:47:08.075+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/ml_pipeline_dag.py took 0.506 seconds
+[2025-11-09T10:47:40.511+0000] {processor.py:161} INFO - Started process (PID=10107) to work on /opt/airflow/dags/ml_pipeline_dag.py
+[2025-11-09T10:47:40.528+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/ml_pipeline_dag.py for tasks to queue
+[2025-11-09T10:47:40.552+0000] {logging_mixin.py:188} INFO - [2025-11-09T10:47:40.536+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/ml_pipeline_dag.py
+[2025-11-09T10:47:40.740+0000] {processor.py:840} INFO - DAG(s) 'ml_pipeline_dag' retrieved from /opt/airflow/dags/ml_pipeline_dag.py
+[2025-11-09T10:47:41.393+0000] {logging_mixin.py:188} INFO - [2025-11-09T10:47:41.391+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-11-09T10:47:41.573+0000] {logging_mixin.py:188} INFO - [2025-11-09T10:47:41.572+0000] {dag.py:3954} INFO - Setting next_dagrun for ml_pipeline_dag to 2025-11-01 00:00:00+00:00, run_after=2025-12-01 00:00:00+00:00
+[2025-11-09T10:47:41.716+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/ml_pipeline_dag.py took 1.331 seconds
+[2025-11-09T10:48:11.937+0000] {processor.py:161} INFO - Started process (PID=10108) to work on /opt/airflow/dags/ml_pipeline_dag.py
+[2025-11-09T10:48:11.942+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/ml_pipeline_dag.py for tasks to queue
+[2025-11-09T10:48:11.950+0000] {logging_mixin.py:188} INFO - [2025-11-09T10:48:11.945+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/ml_pipeline_dag.py
+[2025-11-09T10:48:12.000+0000] {processor.py:840} INFO - DAG(s) 'ml_pipeline_dag' retrieved from /opt/airflow/dags/ml_pipeline_dag.py
+[2025-11-09T10:48:12.141+0000] {logging_mixin.py:188} INFO - [2025-11-09T10:48:12.141+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-11-09T10:48:12.189+0000] {logging_mixin.py:188} INFO - [2025-11-09T10:48:12.189+0000] {dag.py:3954} INFO - Setting next_dagrun for ml_pipeline_dag to 2025-11-01 00:00:00+00:00, run_after=2025-12-01 00:00:00+00:00
+[2025-11-09T10:48:12.229+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/ml_pipeline_dag.py took 0.338 seconds
+[2025-11-09T10:48:42.567+0000] {processor.py:161} INFO - Started process (PID=10109) to work on /opt/airflow/dags/ml_pipeline_dag.py
+[2025-11-09T10:48:42.575+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/ml_pipeline_dag.py for tasks to queue
+[2025-11-09T10:48:42.580+0000] {logging_mixin.py:188} INFO - [2025-11-09T10:48:42.577+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/ml_pipeline_dag.py
+[2025-11-09T10:48:42.607+0000] {processor.py:840} INFO - DAG(s) 'ml_pipeline_dag' retrieved from /opt/airflow/dags/ml_pipeline_dag.py
+[2025-11-09T10:48:42.748+0000] {logging_mixin.py:188} INFO - [2025-11-09T10:48:42.748+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-11-09T10:48:42.835+0000] {logging_mixin.py:188} INFO - [2025-11-09T10:48:42.835+0000] {dag.py:3954} INFO - Setting next_dagrun for ml_pipeline_dag to 2025-11-01 00:00:00+00:00, run_after=2025-12-01 00:00:00+00:00
+[2025-11-09T10:48:42.887+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/ml_pipeline_dag.py took 0.387 seconds
