@@ -1,0 +1,37 @@
+[2025-11-09T06:31:54.900+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-09T06:31:54.939+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ml_pipeline_dag.run_monitoring manual__2025-11-09T06:30:54.012529+00:00 [queued]>
+[2025-11-09T06:31:54.952+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ml_pipeline_dag.run_monitoring manual__2025-11-09T06:30:54.012529+00:00 [queued]>
+[2025-11-09T06:31:54.952+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-11-09T06:31:54.971+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_monitoring> on 2025-11-09 06:30:54.012529+00:00
+[2025-11-09T06:31:54.992+0000] {standard_task_runner.py:63} INFO - Started process 534 to run task
+[2025-11-09T06:31:55.002+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'ml_pipeline_dag', 'run_monitoring', 'manual__2025-11-09T06:30:54.012529+00:00', '--job-id', '22', '--raw', '--subdir', 'DAGS_FOLDER/ml_pipeline_dag.py', '--cfg-path', '/tmp/tmpdg3ivbas']
+[2025-11-09T06:31:55.008+0000] {standard_task_runner.py:91} INFO - Job 22: Subtask run_monitoring
+[2025-11-09T06:31:55.123+0000] {task_command.py:426} INFO - Running <TaskInstance: ml_pipeline_dag.run_monitoring manual__2025-11-09T06:30:54.012529+00:00 [running]> on host 251466b916f8
+[2025-11-09T06:31:55.239+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='ml_pipeline_dag' AIRFLOW_CTX_TASK_ID='run_monitoring' AIRFLOW_CTX_EXECUTION_DATE='2025-11-09T06:30:54.012529+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-09T06:30:54.012529+00:00'
+[2025-11-09T06:31:55.239+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-09T06:31:55.276+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-09T06:31:55.276+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/ml_pipeline_dag.py", line 46, in monitoring_wrapper
+    from utils.monitor_pipeline import run_monitoring
+ImportError: cannot import name 'run_monitoring' from 'utils.monitor_pipeline' (/opt/airflow/utils/monitor_pipeline.py)
+[2025-11-09T06:31:55.297+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=ml_pipeline_dag, task_id=run_monitoring, run_id=manual__2025-11-09T06:30:54.012529+00:00, execution_date=20251109T063054, start_date=20251109T063154, end_date=20251109T063155
+[2025-11-09T06:31:55.304+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 22 for task run_monitoring (cannot import name 'run_monitoring' from 'utils.monitor_pipeline' (/opt/airflow/utils/monitor_pipeline.py); 534)
+[2025-11-09T06:31:55.354+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-11-09T06:31:55.360+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-11-09T06:31:55.361+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

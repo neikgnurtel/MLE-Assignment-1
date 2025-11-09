@@ -1,0 +1,33 @@
+[2025-11-09T07:24:38.224+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-09T07:24:38.242+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ml_pipeline_dag.run_inference scheduled__2024-09-01T00:00:00+00:00 [queued]>
+[2025-11-09T07:24:38.245+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ml_pipeline_dag.run_inference scheduled__2024-09-01T00:00:00+00:00 [queued]>
+[2025-11-09T07:24:38.245+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-11-09T07:24:38.252+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_inference> on 2024-09-01 00:00:00+00:00
+[2025-11-09T07:24:38.261+0000] {standard_task_runner.py:63} INFO - Started process 3678 to run task
+[2025-11-09T07:24:38.268+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'ml_pipeline_dag', 'run_inference', 'scheduled__2024-09-01T00:00:00+00:00', '--job-id', '126', '--raw', '--subdir', 'DAGS_FOLDER/ml_pipeline_dag.py', '--cfg-path', '/tmp/tmpnzh39zk_']
+[2025-11-09T07:24:38.269+0000] {standard_task_runner.py:91} INFO - Job 126: Subtask run_inference
+[2025-11-09T07:24:38.324+0000] {task_command.py:426} INFO - Running <TaskInstance: ml_pipeline_dag.run_inference scheduled__2024-09-01T00:00:00+00:00 [running]> on host 43f902d7ce51
+[2025-11-09T07:24:38.386+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='ml_pipeline_dag' AIRFLOW_CTX_TASK_ID='run_inference' AIRFLOW_CTX_EXECUTION_DATE='2024-09-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-09-01T00:00:00+00:00'
+[2025-11-09T07:24:38.387+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-09T07:24:39.278+0000] {logging_mixin.py:188} INFO - >>> Running Inference...
+[2025-11-09T07:24:39.278+0000] {logging_mixin.py:188} INFO - === Inference: load model ===
+[2025-11-09T07:24:40.196+0000] {logging_mixin.py:188} INFO - Loaded model: rf, val_auc=0.9131954924692737
+[2025-11-09T07:24:40.197+0000] {logging_mixin.py:188} INFO - === Detect latest snapshot ===
+[2025-11-09T07:24:40.198+0000] {logging_mixin.py:188} INFO - Using latest snapshot for inference: 2024-12-01
+[2025-11-09T07:24:40.199+0000] {logging_mixin.py:188} INFO - === Load features ===
+[2025-11-09T07:24:40.450+0000] {logging_mixin.py:188} INFO - === Prepare matrix X ===
+[2025-11-09T07:24:41.349+0000] {logging_mixin.py:188} INFO - === Predict probabilities ===
+[2025-11-09T07:24:41.528+0000] {logging_mixin.py:188} INFO -                  loan_id snapshot_date  pd_score
+0  CUS_0x1000_2023_05_01    2024-12-01  0.699578
+1  CUS_0x100b_2024_03_01    2024-12-01  0.213650
+2  CUS_0x1011_2023_11_01    2024-12-01  0.117684
+3  CUS_0x1013_2023_12_01    2024-12-01  0.158479
+4  CUS_0x1015_2023_08_01    2024-12-01  0.169955
+[2025-11-09T07:24:41.528+0000] {logging_mixin.py:188} INFO - === Save prediction snapshot ===
+[2025-11-09T07:24:41.619+0000] {logging_mixin.py:188} INFO - 💾 Saved predictions to /opt/airflow/datamart/gold/prediction_store/snapshot_date=2024-12-01/predictions.parquet
+[2025-11-09T07:24:41.644+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-11-09T07:24:41.645+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-09T07:24:41.682+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=ml_pipeline_dag, task_id=run_inference, run_id=scheduled__2024-09-01T00:00:00+00:00, execution_date=20240901T000000, start_date=20251109T072438, end_date=20251109T072441
+[2025-11-09T07:24:41.838+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-11-09T07:24:41.944+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-11-09T07:24:41.946+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

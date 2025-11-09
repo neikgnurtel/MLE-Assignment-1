@@ -1,0 +1,5 @@
+{
+  "model_name": "rf",
+  "val_auc": 0.9131954924692737,
+  "artefact": "/opt/airflow/model_store/best_model.pkl"
+}

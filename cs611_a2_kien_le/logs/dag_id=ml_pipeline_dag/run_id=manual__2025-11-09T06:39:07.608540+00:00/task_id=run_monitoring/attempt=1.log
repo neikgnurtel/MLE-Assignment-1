@@ -1,0 +1,25 @@
+[2025-11-09T06:40:11.379+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-09T06:40:11.391+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ml_pipeline_dag.run_monitoring manual__2025-11-09T06:39:07.608540+00:00 [queued]>
+[2025-11-09T06:40:11.394+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ml_pipeline_dag.run_monitoring manual__2025-11-09T06:39:07.608540+00:00 [queued]>
+[2025-11-09T06:40:11.394+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-11-09T06:40:11.400+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_monitoring> on 2025-11-09 06:39:07.608540+00:00
+[2025-11-09T06:40:11.407+0000] {standard_task_runner.py:63} INFO - Started process 1047 to run task
+[2025-11-09T06:40:11.410+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'ml_pipeline_dag', 'run_monitoring', 'manual__2025-11-09T06:39:07.608540+00:00', '--job-id', '29', '--raw', '--subdir', 'DAGS_FOLDER/ml_pipeline_dag.py', '--cfg-path', '/tmp/tmp6a0fj_ch']
+[2025-11-09T06:40:11.411+0000] {standard_task_runner.py:91} INFO - Job 29: Subtask run_monitoring
+[2025-11-09T06:40:11.434+0000] {task_command.py:426} INFO - Running <TaskInstance: ml_pipeline_dag.run_monitoring manual__2025-11-09T06:39:07.608540+00:00 [running]> on host 251466b916f8
+[2025-11-09T06:40:11.471+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='ml_pipeline_dag' AIRFLOW_CTX_TASK_ID='run_monitoring' AIRFLOW_CTX_EXECUTION_DATE='2025-11-09T06:39:07.608540+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-09T06:39:07.608540+00:00'
+[2025-11-09T06:40:11.472+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-09T06:40:12.392+0000] {logging_mixin.py:188} INFO - >>> Running Monitoring...
+[2025-11-09T06:40:12.393+0000] {logging_mixin.py:188} INFO - === Start monitoring ===
+[2025-11-09T06:40:12.394+0000] {logging_mixin.py:188} INFO - === AUC check for 2024-12-01 ===
+[2025-11-09T06:40:12.438+0000] {logging_mixin.py:188} INFO - AUC[2024-12-01] = 0.9132
+[2025-11-09T06:40:12.439+0000] {logging_mixin.py:188} INFO - === PSI on pd_score: 2023-11-01 -> 2024-12-01 ===
+[2025-11-09T06:40:12.447+0000] {logging_mixin.py:188} INFO - PSI(pd_score) 2023-11-01 -> 2024-12-01 = 7.8330
+[2025-11-09T06:40:12.450+0000] {logging_mixin.py:188} INFO - 💾 Saved monitoring summary to /opt/airflow/datamart/gold/monitor_store/monitoring_summary.parquet
+[2025-11-09T06:40:12.482+0000] {logging_mixin.py:188} INFO - 💾 Saved monitoring history to /opt/airflow/datamart/gold/monitor_store/monitoring_history.parquet
+[2025-11-09T06:40:12.482+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-11-09T06:40:12.482+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-09T06:40:12.488+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=ml_pipeline_dag, task_id=run_monitoring, run_id=manual__2025-11-09T06:39:07.608540+00:00, execution_date=20251109T063907, start_date=20251109T064011, end_date=20251109T064012
+[2025-11-09T06:40:12.536+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-11-09T06:40:12.570+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-11-09T06:40:12.570+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

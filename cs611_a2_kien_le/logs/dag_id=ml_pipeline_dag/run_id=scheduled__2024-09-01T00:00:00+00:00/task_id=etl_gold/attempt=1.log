@@ -1,0 +1,44 @@
+[2025-11-09T07:18:40.007+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-09T07:18:40.022+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ml_pipeline_dag.etl_gold scheduled__2024-09-01T00:00:00+00:00 [queued]>
+[2025-11-09T07:18:40.025+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ml_pipeline_dag.etl_gold scheduled__2024-09-01T00:00:00+00:00 [queued]>
+[2025-11-09T07:18:40.025+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-11-09T07:18:40.032+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): etl_gold> on 2024-09-01 00:00:00+00:00
+[2025-11-09T07:18:40.042+0000] {standard_task_runner.py:63} INFO - Started process 2438 to run task
+[2025-11-09T07:18:40.050+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'ml_pipeline_dag', 'etl_gold', 'scheduled__2024-09-01T00:00:00+00:00', '--job-id', '110', '--raw', '--subdir', 'DAGS_FOLDER/ml_pipeline_dag.py', '--cfg-path', '/tmp/tmp3o89utap']
+[2025-11-09T07:18:40.054+0000] {standard_task_runner.py:91} INFO - Job 110: Subtask etl_gold
+[2025-11-09T07:18:40.124+0000] {task_command.py:426} INFO - Running <TaskInstance: ml_pipeline_dag.etl_gold scheduled__2024-09-01T00:00:00+00:00 [running]> on host 43f902d7ce51
+[2025-11-09T07:18:40.182+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='ml_pipeline_dag' AIRFLOW_CTX_TASK_ID='etl_gold' AIRFLOW_CTX_EXECUTION_DATE='2024-09-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-09-01T00:00:00+00:00'
+[2025-11-09T07:18:40.183+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-09T07:18:40.894+0000] {logging_mixin.py:188} INFO - >>> Running Gold Backfill...
+[2025-11-09T07:18:40.895+0000] {logging_mixin.py:188} INFO - === GOLD: features/labels monthly (partitioned by snapshot_date) ===
+[2025-11-09T07:18:41.383+0000] {logging_mixin.py:188} INFO - [GOLD] 2023-01-01 -> features=530  labels=12500
+[2025-11-09T07:18:41.640+0000] {logging_mixin.py:188} INFO - [GOLD] 2023-02-01 -> features=1031  labels=12500
+[2025-11-09T07:18:41.829+0000] {logging_mixin.py:188} INFO - [GOLD] 2023-03-01 -> features=1537  labels=12500
+[2025-11-09T07:18:42.039+0000] {logging_mixin.py:188} INFO - [GOLD] 2023-04-01 -> features=2047  labels=12500
+[2025-11-09T07:18:42.223+0000] {logging_mixin.py:188} INFO - [GOLD] 2023-05-01 -> features=2568  labels=12500
+[2025-11-09T07:18:42.406+0000] {logging_mixin.py:188} INFO - [GOLD] 2023-06-01 -> features=3085  labels=12500
+[2025-11-09T07:18:42.629+0000] {logging_mixin.py:188} INFO - [GOLD] 2023-07-01 -> features=3556  labels=12500
+[2025-11-09T07:18:43.121+0000] {logging_mixin.py:188} INFO - [GOLD] 2023-08-01 -> features=4037  labels=12500
+[2025-11-09T07:18:43.428+0000] {logging_mixin.py:188} INFO - [GOLD] 2023-09-01 -> features=4491  labels=12500
+[2025-11-09T07:18:43.840+0000] {logging_mixin.py:188} INFO - [GOLD] 2023-10-01 -> features=4978  labels=12500
+[2025-11-09T07:18:44.130+0000] {logging_mixin.py:188} INFO - [GOLD] 2023-11-01 -> features=5469  labels=12500
+[2025-11-09T07:18:44.415+0000] {logging_mixin.py:188} INFO - [GOLD] 2023-12-01 -> features=5958  labels=12500
+[2025-11-09T07:18:46.026+0000] {logging_mixin.py:188} INFO - [GOLD] 2024-01-01 -> features=6443  labels=12500
+[2025-11-09T07:18:47.116+0000] {logging_mixin.py:188} INFO - [GOLD] 2024-02-01 -> features=6961  labels=12500
+[2025-11-09T07:18:47.689+0000] {logging_mixin.py:188} INFO - [GOLD] 2024-03-01 -> features=7472  labels=12500
+[2025-11-09T07:18:48.078+0000] {logging_mixin.py:188} INFO - [GOLD] 2024-04-01 -> features=7985  labels=12500
+[2025-11-09T07:18:48.693+0000] {logging_mixin.py:188} INFO - [GOLD] 2024-05-01 -> features=8476  labels=12500
+[2025-11-09T07:18:49.388+0000] {logging_mixin.py:188} INFO - [GOLD] 2024-06-01 -> features=8974  labels=12500
+[2025-11-09T07:18:50.126+0000] {logging_mixin.py:188} INFO - [GOLD] 2024-07-01 -> features=9479  labels=12500
+[2025-11-09T07:18:50.665+0000] {logging_mixin.py:188} INFO - [GOLD] 2024-08-01 -> features=10022  labels=12500
+[2025-11-09T07:18:51.402+0000] {logging_mixin.py:188} INFO - [GOLD] 2024-09-01 -> features=10515  labels=12500
+[2025-11-09T07:18:52.327+0000] {logging_mixin.py:188} INFO - [GOLD] 2024-10-01 -> features=10971  labels=12500
+[2025-11-09T07:18:53.113+0000] {logging_mixin.py:188} INFO - [GOLD] 2024-11-01 -> features=11459  labels=12500
+[2025-11-09T07:18:53.740+0000] {logging_mixin.py:188} INFO - [GOLD] 2024-12-01 -> features=11974  labels=12500
+[2025-11-09T07:18:53.741+0000] {logging_mixin.py:188} INFO - ✅ Gold done
+[2025-11-09T07:18:53.746+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-11-09T07:18:53.747+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-09T07:18:53.781+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=ml_pipeline_dag, task_id=etl_gold, run_id=scheduled__2024-09-01T00:00:00+00:00, execution_date=20240901T000000, start_date=20251109T071840, end_date=20251109T071853
+[2025-11-09T07:18:53.856+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-11-09T07:18:53.930+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-11-09T07:18:53.932+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

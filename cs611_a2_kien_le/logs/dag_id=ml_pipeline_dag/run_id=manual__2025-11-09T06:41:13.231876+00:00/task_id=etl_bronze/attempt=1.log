@@ -1,0 +1,24 @@
+[2025-11-09T06:41:16.560+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-09T06:41:16.581+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ml_pipeline_dag.etl_bronze manual__2025-11-09T06:41:13.231876+00:00 [queued]>
+[2025-11-09T06:41:16.589+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ml_pipeline_dag.etl_bronze manual__2025-11-09T06:41:13.231876+00:00 [queued]>
+[2025-11-09T06:41:16.589+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-11-09T06:41:16.610+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): etl_bronze> on 2025-11-09 06:41:13.231876+00:00
+[2025-11-09T06:41:16.639+0000] {standard_task_runner.py:63} INFO - Started process 1074 to run task
+[2025-11-09T06:41:16.647+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'ml_pipeline_dag', 'etl_bronze', 'manual__2025-11-09T06:41:13.231876+00:00', '--job-id', '30', '--raw', '--subdir', 'DAGS_FOLDER/ml_pipeline_dag.py', '--cfg-path', '/tmp/tmpccucy7mt']
+[2025-11-09T06:41:16.649+0000] {standard_task_runner.py:91} INFO - Job 30: Subtask etl_bronze
+[2025-11-09T06:41:16.752+0000] {task_command.py:426} INFO - Running <TaskInstance: ml_pipeline_dag.etl_bronze manual__2025-11-09T06:41:13.231876+00:00 [running]> on host 251466b916f8
+[2025-11-09T06:41:16.997+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='ml_pipeline_dag' AIRFLOW_CTX_TASK_ID='etl_bronze' AIRFLOW_CTX_EXECUTION_DATE='2025-11-09T06:41:13.231876+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-09T06:41:13.231876+00:00'
+[2025-11-09T06:41:16.998+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-09T06:41:17.776+0000] {logging_mixin.py:188} INFO - >>> Running Bronze Ingest...
+[2025-11-09T06:41:17.776+0000] {logging_mixin.py:188} INFO - === BRONZE: ingest raw CSV -> parquet (lowercase cols) ===
+[2025-11-09T06:41:18.116+0000] {logging_mixin.py:188} INFO - [BRONZE] lms -> datamart/bronze/lms.parquet rows=137500
+[2025-11-09T06:41:18.223+0000] {logging_mixin.py:188} INFO - [BRONZE] financials -> datamart/bronze/financials.parquet rows=12500
+[2025-11-09T06:41:18.262+0000] {logging_mixin.py:188} INFO - [BRONZE] attributes -> datamart/bronze/attributes.parquet rows=12500
+[2025-11-09T06:41:18.835+0000] {logging_mixin.py:188} INFO - [BRONZE] clickstream -> datamart/bronze/clickstream.parquet rows=215376
+[2025-11-09T06:41:18.836+0000] {logging_mixin.py:188} INFO - ✅ Bronze done
+[2025-11-09T06:41:18.840+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-11-09T06:41:18.840+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-09T06:41:18.865+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=ml_pipeline_dag, task_id=etl_bronze, run_id=manual__2025-11-09T06:41:13.231876+00:00, execution_date=20251109T064113, start_date=20251109T064116, end_date=20251109T064118
+[2025-11-09T06:41:18.937+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-11-09T06:41:18.976+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-11-09T06:41:18.977+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

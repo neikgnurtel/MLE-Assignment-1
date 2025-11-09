@@ -1,0 +1,10 @@
+FROM apache/airflow:2.9.2-python3.11
+
+# Cài Python packages cần cho ML pipeline bằng user airflow
+USER airflow
+COPY requirements-airflow.txt /requirements-airflow.txt
+RUN pip install --no-cache-dir -r /requirements-airflow.txt
+
+# Đảm bảo Airflow thấy project code
+ENV PYTHONPATH=/opt/airflow
+WORKDIR /opt/airflow

@@ -1,0 +1,45 @@
+[2025-11-09T07:24:55.427+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-09T07:24:55.447+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ml_pipeline_dag.etl_silver scheduled__2025-01-01T00:00:00+00:00 [queued]>
+[2025-11-09T07:24:55.451+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ml_pipeline_dag.etl_silver scheduled__2025-01-01T00:00:00+00:00 [queued]>
+[2025-11-09T07:24:55.451+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-11-09T07:24:55.463+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): etl_silver> on 2025-01-01 00:00:00+00:00
+[2025-11-09T07:24:55.480+0000] {standard_task_runner.py:63} INFO - Started process 3774 to run task
+[2025-11-09T07:24:55.485+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'ml_pipeline_dag', 'etl_silver', 'scheduled__2025-01-01T00:00:00+00:00', '--job-id', '129', '--raw', '--subdir', 'DAGS_FOLDER/ml_pipeline_dag.py', '--cfg-path', '/tmp/tmpbwzp88rb']
+[2025-11-09T07:24:55.487+0000] {standard_task_runner.py:91} INFO - Job 129: Subtask etl_silver
+[2025-11-09T07:24:55.524+0000] {task_command.py:426} INFO - Running <TaskInstance: ml_pipeline_dag.etl_silver scheduled__2025-01-01T00:00:00+00:00 [running]> on host 43f902d7ce51
+[2025-11-09T07:24:55.576+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='ml_pipeline_dag' AIRFLOW_CTX_TASK_ID='etl_silver' AIRFLOW_CTX_EXECUTION_DATE='2025-01-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-01T00:00:00+00:00'
+[2025-11-09T07:24:55.577+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-09T07:24:56.085+0000] {logging_mixin.py:188} INFO - >>> Running Silver Backfill...
+[2025-11-09T07:24:56.085+0000] {logging_mixin.py:188} INFO - === SILVER: backfill monthly + cleaned partitions ===
+[2025-11-09T07:24:59.029+0000] {logging_mixin.py:188} INFO - [SILVER] 2023-01-01 loan_daily rows=530 -> datamart/silver/loan_daily/snapshot_date=2023-01-01/loan_daily.parquet
+[2025-11-09T07:24:59.047+0000] {logging_mixin.py:188} INFO - [SILVER] 2023-02-01 loan_daily rows=1561 -> datamart/silver/loan_daily/snapshot_date=2023-02-01/loan_daily.parquet
+[2025-11-09T07:24:59.057+0000] {logging_mixin.py:188} INFO - [SILVER] 2023-03-01 loan_daily rows=3098 -> datamart/silver/loan_daily/snapshot_date=2023-03-01/loan_daily.parquet
+[2025-11-09T07:24:59.068+0000] {logging_mixin.py:188} INFO - [SILVER] 2023-04-01 loan_daily rows=5145 -> datamart/silver/loan_daily/snapshot_date=2023-04-01/loan_daily.parquet
+[2025-11-09T07:24:59.078+0000] {logging_mixin.py:188} INFO - [SILVER] 2023-05-01 loan_daily rows=7713 -> datamart/silver/loan_daily/snapshot_date=2023-05-01/loan_daily.parquet
+[2025-11-09T07:24:59.090+0000] {logging_mixin.py:188} INFO - [SILVER] 2023-06-01 loan_daily rows=10798 -> datamart/silver/loan_daily/snapshot_date=2023-06-01/loan_daily.parquet
+[2025-11-09T07:24:59.110+0000] {logging_mixin.py:188} INFO - [SILVER] 2023-07-01 loan_daily rows=14354 -> datamart/silver/loan_daily/snapshot_date=2023-07-01/loan_daily.parquet
+[2025-11-09T07:24:59.127+0000] {logging_mixin.py:188} INFO - [SILVER] 2023-08-01 loan_daily rows=18391 -> datamart/silver/loan_daily/snapshot_date=2023-08-01/loan_daily.parquet
+[2025-11-09T07:24:59.147+0000] {logging_mixin.py:188} INFO - [SILVER] 2023-09-01 loan_daily rows=22882 -> datamart/silver/loan_daily/snapshot_date=2023-09-01/loan_daily.parquet
+[2025-11-09T07:24:59.168+0000] {logging_mixin.py:188} INFO - [SILVER] 2023-10-01 loan_daily rows=27860 -> datamart/silver/loan_daily/snapshot_date=2023-10-01/loan_daily.parquet
+[2025-11-09T07:24:59.193+0000] {logging_mixin.py:188} INFO - [SILVER] 2023-11-01 loan_daily rows=33329 -> datamart/silver/loan_daily/snapshot_date=2023-11-01/loan_daily.parquet
+[2025-11-09T07:24:59.231+0000] {logging_mixin.py:188} INFO - [SILVER] 2023-12-01 loan_daily rows=38757 -> datamart/silver/loan_daily/snapshot_date=2023-12-01/loan_daily.parquet
+[2025-11-09T07:24:59.259+0000] {logging_mixin.py:188} INFO - [SILVER] 2024-01-01 loan_daily rows=44169 -> datamart/silver/loan_daily/snapshot_date=2024-01-01/loan_daily.parquet
+[2025-11-09T07:24:59.286+0000] {logging_mixin.py:188} INFO - [SILVER] 2024-02-01 loan_daily rows=49593 -> datamart/silver/loan_daily/snapshot_date=2024-02-01/loan_daily.parquet
+[2025-11-09T07:24:59.319+0000] {logging_mixin.py:188} INFO - [SILVER] 2024-03-01 loan_daily rows=55018 -> datamart/silver/loan_daily/snapshot_date=2024-03-01/loan_daily.parquet
+[2025-11-09T07:24:59.356+0000] {logging_mixin.py:188} INFO - [SILVER] 2024-04-01 loan_daily rows=60435 -> datamart/silver/loan_daily/snapshot_date=2024-04-01/loan_daily.parquet
+[2025-11-09T07:24:59.392+0000] {logging_mixin.py:188} INFO - [SILVER] 2024-05-01 loan_daily rows=65826 -> datamart/silver/loan_daily/snapshot_date=2024-05-01/loan_daily.parquet
+[2025-11-09T07:24:59.430+0000] {logging_mixin.py:188} INFO - [SILVER] 2024-06-01 loan_daily rows=71244 -> datamart/silver/loan_daily/snapshot_date=2024-06-01/loan_daily.parquet
+[2025-11-09T07:24:59.482+0000] {logging_mixin.py:188} INFO - [SILVER] 2024-07-01 loan_daily rows=76686 -> datamart/silver/loan_daily/snapshot_date=2024-07-01/loan_daily.parquet
+[2025-11-09T07:24:59.539+0000] {logging_mixin.py:188} INFO - [SILVER] 2024-08-01 loan_daily rows=82217 -> datamart/silver/loan_daily/snapshot_date=2024-08-01/loan_daily.parquet
+[2025-11-09T07:24:59.602+0000] {logging_mixin.py:188} INFO - [SILVER] 2024-09-01 loan_daily rows=87754 -> datamart/silver/loan_daily/snapshot_date=2024-09-01/loan_daily.parquet
+[2025-11-09T07:24:59.679+0000] {logging_mixin.py:188} INFO - [SILVER] 2024-10-01 loan_daily rows=93256 -> datamart/silver/loan_daily/snapshot_date=2024-10-01/loan_daily.parquet
+[2025-11-09T07:24:59.730+0000] {logging_mixin.py:188} INFO - [SILVER] 2024-11-01 loan_daily rows=98757 -> datamart/silver/loan_daily/snapshot_date=2024-11-01/loan_daily.parquet
+[2025-11-09T07:24:59.792+0000] {logging_mixin.py:188} INFO - [SILVER] 2024-12-01 loan_daily rows=104288 -> datamart/silver/loan_daily/snapshot_date=2024-12-01/loan_daily.parquet
+[2025-11-09T07:24:59.792+0000] {logging_mixin.py:188} INFO - [SILVER] attributes: 12500 | financials: 12500 | clickstream: 215376 | loan_daily: 137500
+[2025-11-09T07:24:59.793+0000] {logging_mixin.py:188} INFO - ✅ Silver done
+[2025-11-09T07:24:59.853+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-11-09T07:24:59.854+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-09T07:24:59.886+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=ml_pipeline_dag, task_id=etl_silver, run_id=scheduled__2025-01-01T00:00:00+00:00, execution_date=20250101T000000, start_date=20251109T072455, end_date=20251109T072459
+[2025-11-09T07:25:00.027+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-11-09T07:25:00.209+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-11-09T07:25:00.216+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

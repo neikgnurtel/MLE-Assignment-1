@@ -1,0 +1,33 @@
+[2025-11-07T14:04:45.124+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-07T14:04:45.148+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ml_pipeline_dag.train_model manual__2025-11-07T14:04:41.320295+00:00 [queued]>
+[2025-11-07T14:04:45.151+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ml_pipeline_dag.train_model manual__2025-11-07T14:04:41.320295+00:00 [queued]>
+[2025-11-07T14:04:45.151+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-11-07T14:04:45.160+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): train_model> on 2025-11-07 14:04:41.320295+00:00
+[2025-11-07T14:04:45.166+0000] {standard_task_runner.py:63} INFO - Started process 67 to run task
+[2025-11-07T14:04:45.177+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'ml_pipeline_dag', 'train_model', 'manual__2025-11-07T14:04:41.320295+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/ml_pipeline_dag.py', '--cfg-path', '/tmp/tmpx5l2bmw6']
+[2025-11-07T14:04:45.184+0000] {standard_task_runner.py:91} INFO - Job 5: Subtask train_model
+[2025-11-07T14:04:45.263+0000] {task_command.py:426} INFO - Running <TaskInstance: ml_pipeline_dag.train_model manual__2025-11-07T14:04:41.320295+00:00 [running]> on host b06cd9aad9e1
+[2025-11-07T14:04:45.333+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='ml_pipeline_dag' AIRFLOW_CTX_TASK_ID='train_model' AIRFLOW_CTX_EXECUTION_DATE='2025-11-07T14:04:41.320295+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-07T14:04:41.320295+00:00'
+[2025-11-07T14:04:45.334+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-07T14:04:47.484+0000] {logging_mixin.py:188} INFO - === Load GOLD data ===
+[2025-11-07T14:04:49.294+0000] {logging_mixin.py:188} INFO - (28184, 77)
+[2025-11-07T14:04:49.298+0000] {logging_mixin.py:188} INFO - === Temporal split ===
+[2025-11-07T14:04:49.722+0000] {logging_mixin.py:188} INFO - Train snapshots: [Timestamp('2023-05-01 00:00:00'), Timestamp('2023-06-01 00:00:00'), Timestamp('2023-07-01 00:00:00'), Timestamp('2023-08-01 00:00:00'), Timestamp('2023-09-01 00:00:00'), Timestamp('2023-10-01 00:00:00')]
+[2025-11-07T14:04:49.723+0000] {logging_mixin.py:188} INFO - Val snapshot: [Timestamp('2023-11-01 00:00:00')]
+[2025-11-07T14:04:49.723+0000] {logging_mixin.py:188} INFO - === Prepare X, y ===
+[2025-11-07T14:04:49.954+0000] {logging_mixin.py:188} INFO - X_train: (22715, 66) positives: 6417
+[2025-11-07T14:04:49.954+0000] {logging_mixin.py:188} INFO - X_val  : (5469, 66) positives: 1535
+[2025-11-07T14:04:49.954+0000] {logging_mixin.py:188} INFO - === Train models ===
+[2025-11-07T14:04:58.508+0000] {logging_mixin.py:188} INFO - Validation AUC:
+[2025-11-07T14:04:58.511+0000] {logging_mixin.py:188} INFO -   logreg: 0.9872
+[2025-11-07T14:04:58.511+0000] {logging_mixin.py:188} INFO -   rf: 0.9884
+[2025-11-07T14:04:58.511+0000] {logging_mixin.py:188} INFO - ✅ Best model: rf (AUC=0.9884)
+[2025-11-07T14:04:58.511+0000] {logging_mixin.py:188} INFO - === Save best ===
+[2025-11-07T14:04:58.570+0000] {logging_mixin.py:188} INFO - 💾 Saved model to /opt/airflow/model_store/best_model.pkl
+[2025-11-07T14:04:58.571+0000] {logging_mixin.py:188} INFO - 💾 Saved meta   to /opt/airflow/model_store/best_model_meta.json
+[2025-11-07T14:04:58.596+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-11-07T14:04:58.597+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-07T14:04:58.629+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=ml_pipeline_dag, task_id=train_model, run_id=manual__2025-11-07T14:04:41.320295+00:00, execution_date=20251107T140441, start_date=20251107T140445, end_date=20251107T140458
+[2025-11-07T14:04:58.810+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-11-07T14:04:58.942+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-11-07T14:04:58.945+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

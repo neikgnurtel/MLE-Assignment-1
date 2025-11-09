@@ -1,0 +1,35 @@
+[2025-11-09T07:20:36.684+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-09T07:20:36.713+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ml_pipeline_dag.train_model scheduled__2024-09-01T00:00:00+00:00 [queued]>
+[2025-11-09T07:20:36.721+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ml_pipeline_dag.train_model scheduled__2024-09-01T00:00:00+00:00 [queued]>
+[2025-11-09T07:20:36.722+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-11-09T07:20:36.759+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): train_model> on 2024-09-01 00:00:00+00:00
+[2025-11-09T07:20:36.776+0000] {standard_task_runner.py:63} INFO - Started process 3086 to run task
+[2025-11-09T07:20:36.786+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'ml_pipeline_dag', 'train_model', 'scheduled__2024-09-01T00:00:00+00:00', '--job-id', '118', '--raw', '--subdir', 'DAGS_FOLDER/ml_pipeline_dag.py', '--cfg-path', '/tmp/tmp75erfpto']
+[2025-11-09T07:20:36.789+0000] {standard_task_runner.py:91} INFO - Job 118: Subtask train_model
+[2025-11-09T07:20:36.828+0000] {task_command.py:426} INFO - Running <TaskInstance: ml_pipeline_dag.train_model scheduled__2024-09-01T00:00:00+00:00 [running]> on host 43f902d7ce51
+[2025-11-09T07:20:36.870+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='ml_pipeline_dag' AIRFLOW_CTX_TASK_ID='train_model' AIRFLOW_CTX_EXECUTION_DATE='2024-09-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-09-01T00:00:00+00:00'
+[2025-11-09T07:20:36.870+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-09T07:20:38.574+0000] {logging_mixin.py:188} INFO - >>> Running Model Training...
+[2025-11-09T07:20:38.576+0000] {logging_mixin.py:188} INFO - === Load GOLD data ===
+[2025-11-09T07:20:40.193+0000] {logging_mixin.py:188} INFO - (150018, 77)
+[2025-11-09T07:20:40.196+0000] {logging_mixin.py:188} INFO - === Temporal split ===
+[2025-11-09T07:20:41.117+0000] {logging_mixin.py:188} INFO - Train snapshots: [Timestamp('2023-01-01 00:00:00'), Timestamp('2023-02-01 00:00:00'), Timestamp('2023-03-01 00:00:00'), Timestamp('2023-04-01 00:00:00'), Timestamp('2023-05-01 00:00:00'), Timestamp('2023-06-01 00:00:00'), Timestamp('2023-07-01 00:00:00'), Timestamp('2023-08-01 00:00:00'), Timestamp('2023-09-01 00:00:00'), Timestamp('2023-10-01 00:00:00'), Timestamp('2023-11-01 00:00:00'), Timestamp('2023-12-01 00:00:00'), Timestamp('2024-01-01 00:00:00'), Timestamp('2024-02-01 00:00:00'), Timestamp('2024-03-01 00:00:00'), Timestamp('2024-04-01 00:00:00'), Timestamp('2024-05-01 00:00:00'), Timestamp('2024-06-01 00:00:00'), Timestamp('2024-07-01 00:00:00'), Timestamp('2024-08-01 00:00:00'), Timestamp('2024-09-01 00:00:00'), Timestamp('2024-10-01 00:00:00'), Timestamp('2024-11-01 00:00:00')]
+[2025-11-09T07:20:41.121+0000] {logging_mixin.py:188} INFO - Val snapshot: [Timestamp('2024-12-01 00:00:00')]
+[2025-11-09T07:20:41.122+0000] {logging_mixin.py:188} INFO - === Prepare X, y ===
+[2025-11-09T07:20:41.390+0000] {logging_mixin.py:188} INFO - Calculating median values from training data...
+[2025-11-09T07:20:41.613+0000] {logging_mixin.py:188} INFO - X_train: (138044, 50) positives: 39619
+[2025-11-09T07:20:41.614+0000] {logging_mixin.py:188} INFO - X_val  : (11974, 50) positives: 3461
+[2025-11-09T07:20:41.614+0000] {logging_mixin.py:188} INFO - === Train models ===
+[2025-11-09T07:22:41.946+0000] {logging_mixin.py:188} INFO - Validation AUC:
+[2025-11-09T07:22:42.008+0000] {logging_mixin.py:188} INFO -   logreg: 0.5001
+[2025-11-09T07:22:42.015+0000] {logging_mixin.py:188} INFO -   rf: 0.9132
+[2025-11-09T07:22:42.020+0000] {logging_mixin.py:188} INFO - ✅ Best model: rf (AUC=0.9132)
+[2025-11-09T07:22:42.039+0000] {logging_mixin.py:188} INFO - === Save best ===
+[2025-11-09T07:22:42.891+0000] {logging_mixin.py:188} INFO - 💾 Saved model to /opt/airflow/model_store/best_model.pkl
+[2025-11-09T07:22:42.909+0000] {logging_mixin.py:188} INFO - 💾 Saved meta   to /opt/airflow/model_store/best_model_meta.json
+[2025-11-09T07:22:47.448+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-11-09T07:22:47.514+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-09T07:22:48.899+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=ml_pipeline_dag, task_id=train_model, run_id=scheduled__2024-09-01T00:00:00+00:00, execution_date=20240901T000000, start_date=20251109T072036, end_date=20251109T072248
+[2025-11-09T07:22:49.652+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-11-09T07:22:50.711+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-11-09T07:22:50.713+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
